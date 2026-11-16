@@ -1,6 +1,6 @@
 ---
 name: zhoulab-plot-style
-description: "使用完整、自包含的科学绘图规范绘制或统一柱状图、小提琴图、折线图、PETH/事件动态图、森林图及 raster。采用 Arial 9 pt、固定物理轴高、半透明填充和统一分组间距，适用于用户要求沿用此风格的科学数据图；不用于任务流程示意或行为箱插图。"
+description: "使用完整、自包含的科学绘图规范绘制或统一柱状图、小提琴图、折线图、PSTH/PETH、森林图及 raster。采用 Arial 9 pt、固定物理轴高、PSTH 等时间尺度、半透明填充和统一分组间距，适用于用户要求沿用此风格的科学数据图；不用于任务流程示意或行为箱插图。"
 ---
 
 # Zhoulab 科学绘图风格
@@ -20,6 +20,8 @@ description: "使用完整、自包含的科学绘图规范绘制或统一柱状
 - Python 实现使用已安装的 NumPy、Matplotlib、Arial 字体及 Python 标准库，小提琴密度另用 SciPy；可复用代码位于文件夹内的 [scripts/matplotlib_helpers.py](scripts/matplotlib_helpers.py)。不借用文件夹外的项目 helper 来补齐绘图实现。输出需要自包含的 notebook 时，复制本 skill 内的实现到 notebook。
 
 ## 共同物理规格
+
+用户对图宽、图高、宽高比和面板尺寸提出的所有要求，均落实到数据坐标轴绘图区的物理尺寸，并按原始导出结果验收。轴标签、刻度文字、允许的个体标题、图例和安全边距所需的空间计入外围画布。
 
 尺寸对应原始导出图，不能用屏幕像素或整张画布高度替代。1 inch = 25.4 mm，1 pt = 1/72 inch。
 
@@ -63,7 +65,7 @@ description: "使用完整、自包含的科学绘图规范绘制或统一柱状
 - 图例、额外分组说明和显著性放在轴内；正常轴标签、刻度及必要的多层 x 轴标签保留在轴外，不重复写已有组名。
 - 图例放在较空的角落。拥挤时换行、改变列数或增加横向空间，不缩小 9 pt 字号。
 - 普通 Session、Block、PO、CO 等有序折线每个真实数值单位统一占 40.64/4.5 = 9.0311 mm，轴两端各留 0.25 个单位；轴宽 = (x最大值−x最小值+0.5)×9.0311 mm。四、五个连续等级的轴宽分别为 31.61、40.64 mm；十五个连续 Session 为 130.95 mm。不同条件保留同一 x 单位宽度，缺失位置保留 NaN。
-- PETH 默认数据轴为 54.92×40.64 mm，保留实际对齐事件和既定显示窗口；标签增加外边距。二维奖励支持集及确定性 PO–CO 映射保持 40.64 mm 正方形轴、x/y 数值等比例。
+- 普通 PETH 默认数据轴为 54.92×40.64 mm，保留实际对齐事件和既定显示窗口；标签增加外边距。PSTH 使用统一的时间物理尺度，根据各面板时间窗长度计算轴宽，具体规格见 [PSTH / PETH](references/peth.md)。二维奖励支持集及确定性 PO–CO 映射保持 40.64 mm 正方形轴、x/y 数值等比例。
 - 小提琴默认与对应柱图共用类别位置、x 范围、物理缩放及数据轴宽高比，最大完整宽度约 6.11 mm。有上层规则/条件时，组内类别紧邻、组间留距；例如同一规则下 PBS/IA 的中心距约 6.11 mm，不同规则间相邻类别中心距约 9.16 mm。Scott KDE、200点网格、个体点与白心均值/区间的完整规范见 [小提琴图](references/violin.md)。
 - 数据轴物理比例与外围画布分开：长轴标签、色标增加外边距；轴内标注必要时增加两端空白，并按同一 x 物理缩放计算轴宽，柱宽/类别中心距不变。
 - 柱图轴宽必须由柱位、x 范围和 [柱状图规范](references/bar.md) 中的物理缩放计算。允许的个体子图标题或长轴标签只增加外边距/面板间距，不能拉宽柱子。
@@ -80,7 +82,7 @@ description: "使用完整、自包含的科学绘图规范绘制或统一柱状
 | 柱状图、分组柱状图及动物点/可选连线 | [references/bar.md](references/bar.md) |
 | 小提琴图、个体点及已有模型均值/区间 | [references/violin.md](references/violin.md) |
 | Session、Block 或有序条件折线图 | [references/line.md](references/line.md) |
-| PETH / 事件动态图 | [references/peth.md](references/peth.md) |
+| PSTH / PETH / 事件动态图 | [references/peth.md](references/peth.md) |
 | 点估计及区间的森林图 | [references/forest.md](references/forest.md) |
 | 逐试次/逐单元事件 Raster | [references/raster.md](references/raster.md) |
 
