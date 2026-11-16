@@ -65,7 +65,7 @@ def set_plot_style():
             "legend.shadow": False,
             "figure.facecolor": "white",
             "axes.facecolor": "white",
-            "savefig.transparent": True,
+            "savefig.transparent": False,
             "savefig.bbox": None,
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
@@ -452,7 +452,10 @@ def export_plot(fig, outputs, png_dpi=600):
     for output in outputs:
         output = Path(output)
         output.parent.mkdir(parents=True, exist_ok=True)
-        options = dict(bbox_inches=bbox, pad_inches=0, transparent=True)
+        options = dict(
+            bbox_inches=bbox, pad_inches=0, transparent=False,
+            facecolor="white", edgecolor="white",
+        )
         if output.suffix.lower()==".png":
             options["dpi"] = png_dpi
         elif output.suffix.lower()==".pdf":
